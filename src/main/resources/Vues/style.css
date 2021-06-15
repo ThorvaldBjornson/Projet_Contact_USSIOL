@@ -1,0 +1,57 @@
+body
+{
+    background-color: antiquewhite;
+    text-align: center;
+}
+h1
+{
+    background-color: brown;
+    border-radius: 10px;
+    color:white;
+}
+.menu
+{
+    display: inline-block;
+}
+input
+{
+    font-size: 20px;
+}
+.contact_liste
+ {
+    border-collapse: collapse;
+    background-color: white;
+    margin-left: 30%;
+ }
+.contact_liste th
+{
+    background-color: brown;
+    color: white;
+}
+.contact_liste td, .contact_liste th
+{
+    border: solid black 1px;
+    padding: 9px;
+}
+.ajout
+{
+    margin-left: 39%;
+}
+.button_menu
+{
+    background-color: coral;
+    border-radius: 10px;
+}
+.button_validation
+{
+    background-color: rgb(0, 253, 55);
+    border-radius: 10px;
+}
+.disable
+{
+    background-color: darkgray;
+}
+.icon
+{
+    width: 20px;
+}
