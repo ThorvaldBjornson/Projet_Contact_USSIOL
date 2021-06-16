@@ -11,32 +11,12 @@
     <table class="contact_liste">
         <tr>
             <th>ID</th>
-            <th>Prenom</th>
+            <th>Prénom</th>
             <th>Nom</th>
-            <th>Age</th>
-            <th>Telephone</th>
-            <th>Adresse</th>
-            <th>Code Postal</th>
-            <th>Ville</th>
             <th>Action</th>
         </tr>
-        <tr>
-            <td>1</td><td>Pierre</td><td>Dupont</td><td>32 ans</td><td>0606060606</td><td>30 rue de la Paix</td><td>91000</td><td>Paris</td><td><button><img class="icon" src="edit.png"/></button><button><img class="icon" src="delete.png"/></button></td>
-        </tr>
-        <tr>
-            <td>2</td><td>Paul</td><td>Larue</td><td>72 ans</td><td>0606060606</td><td>30 rue de la Paix</td><td>91000</td><td>Paris</td><td><button><img class="icon" src="edit.png"/></button><button><img class="icon" src="delete.png"/></button></td>
-        </tr>
-        <tr>
-            <td>3</td><td>Jaques</td><td>Durant</td><td>56 ans</td><td>0606060606</td><td>30 rue de la Paix</td><td>91000</td><td>Paris</td><td><button><img class="icon" src="edit.png"/></button><button><img class="icon" src="delete.png"/></button></td>
-        </tr>
-        <tr>
-            <td>4</td><td>Michel</td><td>Drucker</td><td>147 ans</td><td>0606060606</td><td>30 rue de la Paix</td><td>91000</td><td>Paris</td><td><button><img class="icon" src="edit.png"/></button><button><img class="icon" src="delete.png"/></button></td>
-        </tr>
-        <tr>
-            <td>5</td><td>Jean</td><td>Durdur</td><td>19 ans</td><td>0606060606</td><td>30 rue de la Paix</td><td>91000</td><td>Paris</td><td><button><img class="icon" src="edit.png"/></button><button><img class="icon" src="delete.png"/></button></td>
-        </tr>
-        <tr>
-            <td>6</td><td>Patrick</td><td>Lapoche</td><td>36 ans</td><td>0606060606</td><td>30 rue de la Paix</td><td>91000</td><td>Paris</td><td><button><img class="icon" src="edit.png"/></button><button><img class="icon" src="delete.png"/></button></td>
+        <tr th:each="e : ${ContactListe}">
+            <td:text="${e}{Id}"></td><td:text="${e}{Prenom}"></td><td:text="${e}{Nom}"></td><a href="'/edit/'+ ${e}{Id}"><button><img class="icon" src="edit.png"/></a></button><a href="'/delete/'+ ${e}{Id}"><button><img class="icon" src="delete.png"/></button></a></td>
         </tr>
     </table>
 </html>
