@@ -11,6 +11,7 @@ public class Mail {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String mail;
+    private Long idContact;
 
     protected Mail() {}
 
@@ -21,7 +22,7 @@ public class Mail {
     @Override
     public String toString() {
         return String.format(
-                "Contact[id=%d, mail='%s']",
+                "Contact[id=%d, mail='%s', idContact='%s']",
                 id, mail);
     }
 
@@ -32,4 +33,6 @@ public class Mail {
     public String getMail() {
         return mail;
     }
+
+    public Long getIdContact() { return idContact; }
 }

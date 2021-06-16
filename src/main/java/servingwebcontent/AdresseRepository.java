@@ -1,11 +1,11 @@
 package servingwebcontent;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
 public interface AdresseRepository extends CrudRepository<Adresse, Long>
-	{
-	Adresse findByAdresse(String ligne, String CP, String ville);
-	Optional<Adresse> findById(Long id);
-	}
+{
+	Adresse findById(long id);
+	List<Adresse> findByVille(String ville);
+}
