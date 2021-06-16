@@ -84,13 +84,6 @@ public class ContactApplication {
             }
             log.info("");
 
-            // fetch an individual mail
-            log.info("Mail found with findByMail(test@outlook.com):");
-            log.info("--------------------------------");
-            Mail mailIndividual = mailRepository.findByMail("test@outlook.com");
-            log.info(mailIndividual.toString());
-            log.info("");
-
             // fetch few mail using contact id
             log.info("Mails found with findByIdContact(1L):");
             log.info("-------------------------------");
