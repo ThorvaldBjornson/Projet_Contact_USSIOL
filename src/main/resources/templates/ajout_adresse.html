@@ -4,19 +4,13 @@
 <h1>Contact</h1>
 <div class="menu">
     <a href="/index"><button class="button_menu">Lecture des contacts</button></a>
-    <button class="button_menu disable" disabled>Ajout de contacts</button>
+    <button class="button_menu" >Ajout de contacts</button>
     <button class="button_menu">Logout</button>
 </div>
 <br>
 <br>
-<form action="#" th:action="@{/ajouter_contact}" th:object="${form}" method="post">
+<form action="#" th:action="@{/ajouter_adresse/{id}(id=${id})}" th:object="${form2}" method="post">
     <table class="ajout">
-        <tr>
-            <th><p>Nom : </p></th><td><input th:field="*{nom}" type="text"/></td>
-        </tr>
-        <tr>
-            <th><p>Prenom : </p></th><td><input th:field="*{prenom}" type="text"/></td>
-        </tr>
         <tr>
             <th><p>Adresse : </p></th><td><input class="adresse" th:field="*{libelle}" type="text"/></td>
         </tr>
@@ -26,12 +20,8 @@
         <tr>
             <th><p>Ville : </p></th><td><input class="ville" th:field="*{ville}" type="text"/></td>
         </tr>
-        <tr>
-            <th><p>Mail : </p></th><td><input class="mail" th:field="*{mail}" type="email"></td>
-        </tr>
     </table>
     <input class="button_validation" text="Ajouter" type="submit" >
-
 </form>
 <br>
 </html>

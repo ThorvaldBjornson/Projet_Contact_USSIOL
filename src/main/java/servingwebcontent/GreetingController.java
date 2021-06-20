@@ -58,19 +58,57 @@ public class GreetingController
 		return "redirect:/index";
 		}
 
-	@PostMapping("/ajouter_mail/{id}")
-	public String addMail(@ModelAttribute Form form, Model model)
+	@GetMapping("/ajouter_mail/{id}")
+	public String addMailGet(@PathVariable long id, Model model)
 		{
-		Adresse adresse = new Adresse(form.getLibelle(), form.getCp(), form.getVille());
-		adresseRepository.save(adresse);
+		model.addAttribute("id", id);
+		model.addAttribute("mail", new String());
+		return "ajout_mail";
+		}
 
-		Contact contact = new Contact(form.getPrenom(), form.getNom());
-		contact.addAdresse(adresse);
-		contactRepository.save(contact);
+	@PostMapping("/ajouter_mail/{id}")
+	public String addMailPost(@PathVariable long id, @ModelAttribute String mail, Model model)
+		{
+		String redirection = new String();
+		if(mailRepository.findByMail(mail) == null)
+			{
+			Mail mail1 = new Mail(mail, contactRepository.findById(id));
+			mailRepository.save(mail1);
+			redirection = "redirect:/index";
+			}
+		else
+			{
+			redirection = "redirect:/erreur_ajout";
+			}
+		return redirection;
+		}
 
-		Mail mail = new Mail(form.getMail(), contact);
+	@GetMapping("/erreur_ajout")
+	public String erreur_ajout(Model model)
+		{
+		return "erreur_ajout";
+		}
 
-		mailRepository.save(mail);
+	@GetMapping("/ajouter_adresse/{id}")
+	public String addAdressGet(@PathVariable long id, Model model)
+		{
+		model.addAttribute("id", id);
+		model.addAttribute("form2", new Form2());
+		return "ajout_adresse";
+		}
+
+	@PostMapping("/ajouter_adresse/{id}")
+	public String addAdressPost(@PathVariable long id, @ModelAttribute Form2 form, Model model)
+		{
+		Adresse adr = adresseRepository.findByLibelleAndCpAndVille(form.getLibelle(), form.getCp(), form.getVille());
+		Contact c = contactRepository.findById(id);
+		if(adr == null)
+			{
+			adr = new Adresse(form.getLibelle(), form.getCp(), form.getVille());
+			adresseRepository.save(adr);
+			}
+		c.addAdresse(adr);
+		contactRepository.save(c);
 		return "redirect:/index";
 		}
 

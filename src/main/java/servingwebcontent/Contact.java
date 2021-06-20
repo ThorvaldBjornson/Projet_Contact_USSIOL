@@ -32,12 +32,6 @@ public class Contact
 				)
 	private List<Adresse> adresses = new ArrayList<Adresse>();
 
-	/*@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany( targetEntity=Mail.class, mappedBy="contact", cascade= CascadeType.ALL)
-	private List<Mail> mails = new ArrayList<Mail>();*/
-
-
-
 
 	public Contact()
 		{
@@ -50,11 +44,6 @@ public class Contact
 		{
 		adresses.add(adresse);
 		}
-
-	/*public void  addMail(Mail mail)
-		{
-		mails.add(mail);
-		}*/
 
 	public Contact(String firstName, String lastName)
 		{

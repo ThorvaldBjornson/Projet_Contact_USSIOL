@@ -38,7 +38,7 @@ public class ContactApplication
     public CommandLineRunner demo(ContactRepository contactRepository, AdresseRepository adresseRepository, MailRepository mailRepository) {
         return (args) -> {
 
-        Mail mail1 = new Mail("bonjour@bonjour.com", contactRepository.findById(5L));
+       /* Mail mail1 = new Mail("bonjour@bonjour.com", contactRepository.findById(5L));
         Mail mail2 = new Mail("aaa@aaaa.com", contactRepository.findById(5L));
 
         mailRepository.save(mail1);
@@ -80,7 +80,7 @@ public class ContactApplication
             l1.forEach(adresse -> log.info(adresse.toString()));
 
             }
-
+*/
        /* log.info("------------- Contacts des mails ------------");
         log.info(".................................................");
         for (Contact contact : contactRepository.findAll())
