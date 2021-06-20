@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 public class GreetingController
-	{
+{
 
 	@GetMapping("/index")
 	public String index(Model model) {
@@ -29,11 +29,7 @@ public class GreetingController
 
 	@Autowired
 	ContactRepository contactRepository;
-
-	@Autowired
 	AdresseRepository adresseRepository;
-
-	@Autowired
 	MailRepository mailRepository;
 
 
@@ -60,5 +56,10 @@ public class GreetingController
 		return "contact";
 		}
 
-
+	@GetMapping("/deleteContact/{id}")
+	public String deleteContact(@PathVariable long id, Model model)
+	{
+		contactRepository.deleteById(id);
+		return "ValidationDelete";
 	}
+}
