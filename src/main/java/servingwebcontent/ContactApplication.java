@@ -38,11 +38,11 @@ public class ContactApplication
     public CommandLineRunner demo(ContactRepository contactRepository, AdresseRepository adresseRepository, MailRepository mailRepository) {
         return (args) -> {
 
-        Mail mail1 = new Mail("bonjour@bonjour.com");
+        /*Mail mail1 = new Mail("bonjour@bonjour.com");
         Mail mail2 = new Mail("aaa@aaaa.com");
 
         mailRepository.save(mail1);
-        mailRepository.save(mail2);
+        mailRepository.save(mail2);*/
 
         Adresse adresse1 = new Adresse("2 place d'Erlon", "51100", "Reims");
         Adresse adresse2 = new Adresse("1 rue de la fontaine", "51100", "Reims");
@@ -59,8 +59,8 @@ public class ContactApplication
         c1.addAdresse(adresse2);
         c2.addAdresse(adresse2);
 
-        c1.addMail(mail1);
-        c1.addMail(mail2);
+       // c1.addMail(mail1);
+       // c1.addMail(mail2);
 
         contactRepository.save(c1);
         contactRepository.save(c2);
@@ -81,7 +81,7 @@ public class ContactApplication
 
             }
 
-        log.info("------------- Contacts des mails ------------");
+       /* log.info("------------- Contacts des mails ------------");
         log.info(".................................................");
         for (Contact contact : contactRepository.findAll())
             {
@@ -89,7 +89,7 @@ public class ContactApplication
             log.info(contact.toString());
             List<Mail> l2 = contact.getMails();
             l2.forEach(mail -> log.info(mail.toString()));
-            }
+            }*/
         log.info("");
         /*log.info("------------- Adresses des contacts ------------");
         log.info(".................................................");

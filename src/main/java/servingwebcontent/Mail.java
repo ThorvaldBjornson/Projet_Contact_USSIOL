@@ -12,7 +12,7 @@ public class Mail {
     private Long id;
     private String mail;
 
-    @ManyToOne
+   /* @ManyToOne
     @JoinColumn( name="contact_id" )
     private Contact contact;
 
@@ -24,7 +24,7 @@ public class Mail {
     public void setContact(Contact contact) {
     this.contact = contact;
     }
-
+*/
 
     public Mail()
         {
