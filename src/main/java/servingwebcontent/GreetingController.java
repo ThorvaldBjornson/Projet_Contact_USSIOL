@@ -60,8 +60,17 @@ public class GreetingController
 	@GetMapping("/contact/{id}")
 	public String testParam(@PathVariable long id, Model model)
 		{
-		model.addAttribute("contact", contactRepository.findById(id));
+		Contact contact = contactRepository.findById(id);
+		model.addAttribute("contact", contact);
 		model.addAttribute("adresses", contactRepository.findById(id).getAdresses());
+		try
+		{
+			model.addAttribute("mails", contact.getMails());
+		}catch (Exception e)
+		{
+
+		}
+		//model.addAttribute("mails", mailRepository.findByContact(contact));
 		return "contact";
 		}
 
