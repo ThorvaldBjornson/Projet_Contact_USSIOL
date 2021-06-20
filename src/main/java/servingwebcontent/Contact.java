@@ -21,6 +21,9 @@ public class Contact
 	private String firstName;
 	private String lastName;
 
+	@OneToMany(targetEntity = Mail.class,mappedBy = "contact")
+	private List<Mail> mails = new ArrayList<>();
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 				name = "adresses",
@@ -80,12 +83,13 @@ public class Contact
 		return lastName;
 		}
 
-	public List<Adresse> getAdresses()
+	public List<Mail> getMails() {
+		return mails;
+	}
+
+		public List<Adresse> getAdresses()
 		{
 		return adresses;
 		}
-	/*public List<Mail> getMails()
-		{
-		return mails;
-		}*/
+
 	}

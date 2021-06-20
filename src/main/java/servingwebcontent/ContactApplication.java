@@ -38,11 +38,11 @@ public class ContactApplication
     public CommandLineRunner demo(ContactRepository contactRepository, AdresseRepository adresseRepository, MailRepository mailRepository) {
         return (args) -> {
 
-        /*Mail mail1 = new Mail("bonjour@bonjour.com");
-        Mail mail2 = new Mail("aaa@aaaa.com");
+        Mail mail1 = new Mail("bonjour@bonjour.com", contactRepository.findById(5L));
+        Mail mail2 = new Mail("aaa@aaaa.com", contactRepository.findById(5L));
 
         mailRepository.save(mail1);
-        mailRepository.save(mail2);*/
+        mailRepository.save(mail2);
 
         Adresse adresse1 = new Adresse("2 place d'Erlon", "51100", "Reims");
         Adresse adresse2 = new Adresse("1 rue de la fontaine", "51100", "Reims");

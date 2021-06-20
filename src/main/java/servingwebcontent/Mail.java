@@ -12,32 +12,32 @@ public class Mail {
     private Long id;
     private String mail;
 
-   /* @ManyToOne
-    @JoinColumn( name="contact_id" )
+    @ManyToOne
+    @JoinColumn(name="contact", nullable = false)
     private Contact contact;
 
-
     public Contact getContact() {
-    return contact;
+        return contact;
     }
 
     public void setContact(Contact contact) {
-    this.contact = contact;
+        this.contact = contact;
     }
-*/
 
     public Mail()
         {
         }
 
-    public Mail(String mail) {
+    public Mail(String mail, Contact contact)
+    {
         this.mail = mail;
+        this.contact = contact;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Contact[id=%d, mail='%s']",
+                "Mail[id=%d, mail='%s']",
                 id, mail);
     }
 
