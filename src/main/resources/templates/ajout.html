@@ -9,56 +9,26 @@
 </div>
 <br>
 <br>
-<form action="#" th:action="@{/ajouter_contact}" th:object="${contact}" method="post">
+<form action="#" th:action="@{/ajouter_contact}" th:object="${form}" method="post">
     <table class="ajout">
         <tr>
-            <th><p>Nom : </p></th><td><input th:field="*{lastName}" type="text"/></td>
+            <th><p>Nom : </p></th><td><input th:field="*{nom}" type="text"/></td>
         <tr>
-            <th><p>Prenom : </p></th><td><input th:field="*{firstName}" type="text"/></td>
+            <th><p>Prenom : </p></th><td><input th:field="*{prenom}" type="text"/></td>
         </tr>
         <tr>
-            <th><p>Adresse : </p></th><td><input class="adresse" name="adresse1" type="text"/></td>
+            <th><p>Adresse : </p></th><td><input class="adresse" th:field="*{libelle}" type="text"/></td>
         </tr>
         <tr>
-            <th><p>Code Postal : </p></th><td><input class="cp" name="cp1" type="text"/></td>
+            <th><p>Code Postal : </p></th><td><input class="cp" th:field="*{cp}" type="text"/></td>
         </tr>
         <tr>
-            <th><p>Ville : </p></th><td><input class="ville" name="ville1" type="text"/></td>
+            <th><p>Ville : </p></th><td><input class="ville" th:field="*{ville}" type="text"/></td>
         </tr>
         <tr>
-            <th><p>Mail : </p></th><td><input class="mail" name="mail1" type="email"></td>
+            <th><p>Mail : </p></th><td><input class="mail" th:field="*{mail}" type="email"></td>
         </tr>
     </table>
-    <button onclick="add_adresse(); return false;">Ajouter adresse</button>
-    <button onclick="add_mail(); return false;">Ajouter mail</button>
-
-
-    <script type="text/javascript">
-            function add_mail()
-                {
-		var nb = (document.getElementsByClassName("mail").length)+1;
-		var tr = document.createElement('tr');
-                tr.innerHTML = '<tr><th><p>Mail : </p></th><td><input class="mail" name="mail'+nb+'" type="email"></td></tr>';
-                document.getElementsByClassName('ajout')[0].appendChild(tr);
-                }
-	    function add_adresse()
-                {
-		var nb1 = (document.getElementsByClassName("adresse").length)+1;
-		var tr1 = document.createElement('tr');
-                tr1.innerHTML = '<tr><th><p>Adresse : </p></th><td><input class="adresse" name="adresse'+nb1+'" type="text"></td></tr>';
-                document.getElementsByClassName('ajout')[0].appendChild(tr1);
-
-		var nb2 = (document.getElementsByClassName("cp").length)+1;
-		var tr2 = document.createElement('tr');
-                tr2.innerHTML = '<tr><th><p>Code Postal : </p></th><td><input class="cp" name="cp'+nb2+'" type="text"></td></tr>';
-                document.getElementsByClassName('ajout')[0].appendChild(tr2);
-
-		var nb3 = (document.getElementsByClassName("ville").length)+1;
-		var tr3 = document.createElement('tr');
-                tr3.innerHTML = '<tr><th><p>Ville : </p></th><td><input class="ville" name="ville'+nb3+'" type="ville"></td></tr>';
-                document.getElementsByClassName('ajout')[0].appendChild(tr3);
-		}
-    </script>
     <input class="button_validation" text="Ajouter" type="submit" >
 
 </form>

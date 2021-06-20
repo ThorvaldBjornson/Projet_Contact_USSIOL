@@ -29,6 +29,7 @@ public class GreetingController
 
 	@Autowired
 	ContactRepository contactRepository;
+	@Autowired
 	AdresseRepository adresseRepository;
 	MailRepository mailRepository;
 
@@ -36,16 +37,24 @@ public class GreetingController
 	@GetMapping("/ajouter_contact")
 	public String greeting(Model model)
 		{
-		model.addAttribute("contact", new Contact());
+		model.addAttribute("form", new Form());
 		return "ajout";
 		}
 
 	@PostMapping("/ajouter_contact")
-	public String formSubmit(@ModelAttribute Contact contact, Model model)
+	public String formSubmit(@ModelAttribute Form form, Model model)
 		{
-		model.addAttribute("contact", contact);
+		Adresse adresse = new Adresse(form.getLibelle(), form.getCp(), form.getVille());
+		adresseRepository.save(adresse);
+
+		Contact contact = new Contact(form.getPrenom(), form.getNom());
+		contact.addAdresse(adresse);
+
 		contactRepository.save(contact);
-		return "FormResult";
+
+		//Mail mail = new Mail(form.getMail());
+
+		return "redirect:/index";
 		}
 
 	@GetMapping("/contact/{id}")
