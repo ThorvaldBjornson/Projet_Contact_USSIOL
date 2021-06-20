@@ -1,24 +1,39 @@
-<html xmlns:th="https://www.thymeleaf.org">
-    <link rel="stylesheet"type="text/css" href="style.css"/>
-    <h1>Contact</h1>
-    <div class="menu">
-        <button class="button_menu disable">Lecture des contacts</button>
-        <button class="button_menu">Ajout de contacts</button>
-        <button class="button_menu">Logout</button>
-    </div>
-    <br>
-    <br>
-    <table class="contact_liste">
-        <tr>
-            <th>ID</th>
-            <th>Prénom</th>
-            <th>Nom</th>
-            <th>Action</th>
-        </tr>
-        <tr th:each="e : ${ContactListe}">
-            <td th:text="${e}{Id}"></td><td th:text="${e}{Prenom}"></td><td th:text="${e}{Nom}"></td><a href="'/edit/'+ ${e}{Id}"><button><img class="icon" src="edit.png"/></a></button><a href="'/delete/'+ ${e}{Id}"><button><img class="icon" src="delete.png"/></button></a></td>
-        </tr>
-    </table>
-<div>ici</div>
-<div>    <div th:text="${login}"></div>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/style.css"/>
+<h1>Contact</h1>
+<div class="menu">
+    <button class="button_menu disable">Lecture des contacts</button>
+    <button class="button_menu">Ajout de contacts</button>
+    <button class="button_menu">Logout</button>
+</div>
+<br>
+<br>
+<table class="contact_liste">
+    <tr>
+        <th>ID</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th colspan="3">Action</th>
+    </tr>
+    <tr th:each="c : ${contact}">
+        <td th:utext="${c.id}">id</td>
+        <td th:utext="${c.firstName}">prenom</td>
+        <td th:utext="${c.lastName}">nom</td>
+        <td>
+            <a th:href="@{/contact/{id}(id=${c.id})}">
+                <button><img class="icon" src="user.png"/></button>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/edit/{id}(id=${c.id})}">
+                <button><img class="icon" src="edit.png"/></button>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/delete/{id}(id=${c.id})}">
+                <button><img class="icon" src="delete.png"/></button>
+            </a>
+        </td>
+    </tr>
+</table>
 </html>

@@ -1,30 +1,44 @@
 package servingwebcontent;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "mail")
 public class Mail {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String mail;
-    private Long idContact;
 
-    protected Mail() {}
+    @ManyToOne
+    @JoinColumn( name="contact_id" )
+    private Contact contact;
 
-    public Mail(String mail, Long idContact) {
+
+    public Contact getContact() {
+    return contact;
+    }
+
+    public void setContact(Contact contact) {
+    this.contact = contact;
+    }
+
+
+    public Mail()
+        {
+        }
+
+    public Mail(String mail) {
         this.mail = mail;
-        this.idContact = idContact;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Contact[id=%d, mail='%s', idContact='%d']",
-                id, mail, idContact);
+                "Contact[id=%d, mail='%s']",
+                id, mail);
     }
 
     public Long getId() {
@@ -35,5 +49,4 @@ public class Mail {
         return mail;
     }
 
-    public Long getIdContact() { return idContact; }
 }

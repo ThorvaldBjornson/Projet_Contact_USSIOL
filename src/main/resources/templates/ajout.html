@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 <meta charset="UTF-8">
 <link rel="stylesheet"type="text/css" href="style.css"/>
 <h1>Contact</h1>
@@ -9,12 +9,12 @@
 </div>
 <br>
 <br>
-<form>
+<form action="#" th:action="@{/ajouter_contact}" th:object="${contact}" method="post">
     <table class="ajout">
         <tr>
-            <th><p>Nom : </p></th><td><input type="text"/></td>
+            <th><p>Nom : </p></th><td><input th:field="*{lastName}" type="text"/></td>
         <tr>
-            <th><p>Prenom : </p></th><td><input type="text"/></td>
+            <th><p>Prenom : </p></th><td><input th:field="*{firstName}" type="text"/></td>
         </tr>
         <tr>
             <th><p>Adresse : </p></th><td><input class="adresse" name="adresse1" type="text"/></td>
@@ -59,8 +59,8 @@
                 document.getElementsByClassName('ajout')[0].appendChild(tr3);
 		}
     </script>
+    <input class="button_validation" text="Ajouter" type="submit" >
 
 </form>
 <br>
-<button class="button_validation">Ajouter</button>
 </html>

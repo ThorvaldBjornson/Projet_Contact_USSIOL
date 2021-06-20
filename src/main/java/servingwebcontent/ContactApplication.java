@@ -2,6 +2,7 @@ package servingwebcontent;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,22 +17,101 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
-public class ContactApplication {
+public class ContactApplication
+    {
+
+
 
     private static final Logger log = LoggerFactory.getLogger(ContactApplication.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+        {
         SpringApplication.run(ContactApplication.class);
-    }
+        }
 
 
     @Bean
-    public CommandLineRunner demo(ContactRepository contactRepository, AdresseRepository adresseRepository, MailRepository mailRepository, Contact_Adresse_Repository contact_adresse_repository) {
+    public CommandLineRunner demo(ContactRepository contactRepository, AdresseRepository adresseRepository, MailRepository mailRepository) {
         return (args) -> {
-            // save a few contacts
-            contactRepository.save(new Contact("Jack", "Bauer"));
+
+        Mail mail1 = new Mail("bonjour@bonjour.com");
+        Mail mail2 = new Mail("aaa@aaaa.com");
+
+        mailRepository.save(mail1);
+        mailRepository.save(mail2);
+
+        Adresse adresse1 = new Adresse("2 place d'Erlon", "51100", "Reims");
+        Adresse adresse2 = new Adresse("1 rue de la fontaine", "51100", "Reims");
+
+        adresseRepository.save(adresse1);
+        adresseRepository.save(adresse2);
+
+        Contact c1 = new Contact("Jack", "Bauer");
+        Contact c2 = new Contact("Kim", "Bauer");
+        Contact c3 = new Contact("David", "Palmer");
+        Contact c4 = new Contact("Michelle", "Dessler");
+
+        c1.addAdresse(adresse1);
+        c1.addAdresse(adresse2);
+        c2.addAdresse(adresse2);
+
+        c1.addMail(mail1);
+        c1.addMail(mail2);
+
+        contactRepository.save(c1);
+        contactRepository.save(c2);
+        contactRepository.save(c3);
+        contactRepository.save(c4);
+
+
+
+        log.info("------------- Contacts des adresses ------------");
+        log.info(".................................................");
+        for (Contact contact : contactRepository.findAll())
+            {
+            log.info("-------------------------------------------------");
+            log.info(contact.toString());
+            List<Adresse> l1 = contact.getAdresses();
+
+            l1.forEach(adresse -> log.info(adresse.toString()));
+
+            }
+
+        log.info("------------- Contacts des mails ------------");
+        log.info(".................................................");
+        for (Contact contact : contactRepository.findAll())
+            {
+            log.info("-------------------------------------------------");
+            log.info(contact.toString());
+            List<Mail> l2 = contact.getMails();
+            l2.forEach(mail -> log.info(mail.toString()));
+            }
+        log.info("");
+        /*log.info("------------- Adresses des contacts ------------");
+        log.info(".................................................");
+        for (Contact contact : contactRepository.findAll())
+            {
+            log.info("-------------------------------------------------");
+            log.info(contact.getFirstName());
+            log.info(contact.getLastName());
+            List<Adresse> l = contact.getAdresses();
+            l.forEach(adresse -> log.info(adresse.toString()));
+            }
+        log.info("");*/
+/*
+        log.info("Adresses found with findAll():");
+        log.info("-------------------------------");
+        for (Adresse adresse: adresseRepository.findAll()) {
+        log.info(adresse.toString());
+        }
+        log.info("");*/
+
+        // save a few contacts
+   /*         contactRepository.save(new Contact("Jack", "Bauer"));
             contactRepository.save(new Contact("Chloe", "O'Brian"));
             contactRepository.save(new Contact("Kim", "Bauer"));
             contactRepository.save(new Contact("David", "Palmer"));
@@ -63,9 +143,6 @@ public class ContactApplication {
             // }
             log.info("");
 
-            // save a few Adresses
-            adresseRepository.save(new Adresse("36 rue de la paix", "08000", "Charleville-Mézières"));
-            adresseRepository.save(new Adresse("92 rue du pont", "51100", "Reims"));
 
             // fetch all contacts
             log.info("Adresses found with findAll():");
@@ -136,7 +213,7 @@ public class ContactApplication {
             for (Contact_Adresse contact_adresse : contact_adresse_repository.findByIdAdresse(1L)) {
                 log.info(contact_adresse.toString());
             }
-            log.info("");
+            log.info("");*/
         };
     }
 

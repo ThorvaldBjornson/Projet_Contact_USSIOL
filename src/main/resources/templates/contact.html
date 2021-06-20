@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/style.css" />
+<h1>Contact</h1>
+<div class="menu">
+    <button class="button_menu disable">Lecture des contacts</button>
+    <button class="button_menu">Ajout de contacts</button>
+    <button class="button_menu">Logout</button>
+</div>
+<br>
+<br>
+<h2 th:utext="${contact.firstName}">
+
+</h2>
+<table class="contact_liste">
+    <tr>
+        <th>ID</th>
+        <th>libelle</th>
+        <th>Code Postal</th>
+        <th>Ville</th>
+        <th colspan="2">Action</th>
+    </tr>
+    <tr th:each="c : ${adresses}">
+        <td th:utext="${c.id}"></td>
+        <td th:utext="${c.libelle}"></td>
+        <td th:utext="${c.cp}"></td>
+        <td th:utext="${c.ville}"></td>
+        <td><a th:href="@{/edit/{id}(id=${c.id})}"><button><img class="icon" src="edit.png"/></button></a></td>
+        <td><a th:href="@{/delete/{id}(id=${c.id})}"><button><img class="icon" src="delete.png"/></button></a></td>
+    </tr>
+</table>
+</html>

@@ -1,9 +1,9 @@
 package servingwebcontent;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Adresse {
@@ -14,7 +14,16 @@ public class Adresse {
     private String cp;
     private String ville;
 
-    protected Adresse() {}
+    @ManyToMany
+    private List<Contact> contacts = new ArrayList<Contact>();
+
+    public void  addAdresse(Contact contact)
+        {
+        contacts.add(contact);
+        }
+
+
+    public Adresse() {}
 
     public Adresse(String libelle, String cp, String ville) {
         this.libelle = libelle;
@@ -37,10 +46,13 @@ public class Adresse {
         return libelle;
     }
 
-    public String getCP() {
+    public String getCp() {
         return cp;
     }
 
     public String getVille(){ return ville; }
+
+    public List<Contact> getContacts(){ return contacts; }
+
 
 }
