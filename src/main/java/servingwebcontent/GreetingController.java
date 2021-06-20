@@ -31,34 +31,51 @@ public class GreetingController
 	ContactRepository contactRepository;
 	@Autowired
 	AdresseRepository adresseRepository;
+	@Autowired
 	MailRepository mailRepository;
 
 
 	@GetMapping("/ajouter_contact")
-	public String greeting(Model model)
+	public String pageAddContact(Model model)
 		{
 		model.addAttribute("form", new Form());
 		return "ajout";
 		}
 
 	@PostMapping("/ajouter_contact")
-	public String formSubmit(@ModelAttribute Form form, Model model)
+	public String addContact(@ModelAttribute Form form, Model model)
 		{
 		Adresse adresse = new Adresse(form.getLibelle(), form.getCp(), form.getVille());
 		adresseRepository.save(adresse);
 
 		Contact contact = new Contact(form.getPrenom(), form.getNom());
 		contact.addAdresse(adresse);
-
 		contactRepository.save(contact);
 
-		//Mail mail = new Mail(form.getMail());
+		Mail mail = new Mail(form.getMail(), contact);
 
+		mailRepository.save(mail);
+		return "redirect:/index";
+		}
+
+	@PostMapping("/ajouter_mail/{id}")
+	public String addMail(@ModelAttribute Form form, Model model)
+		{
+		Adresse adresse = new Adresse(form.getLibelle(), form.getCp(), form.getVille());
+		adresseRepository.save(adresse);
+
+		Contact contact = new Contact(form.getPrenom(), form.getNom());
+		contact.addAdresse(adresse);
+		contactRepository.save(contact);
+
+		Mail mail = new Mail(form.getMail(), contact);
+
+		mailRepository.save(mail);
 		return "redirect:/index";
 		}
 
 	@GetMapping("/contact/{id}")
-	public String testParam(@PathVariable long id, Model model)
+	public String getContact(@PathVariable long id, Model model)
 		{
 		Contact contact = contactRepository.findById(id);
 		model.addAttribute("contact", contact);

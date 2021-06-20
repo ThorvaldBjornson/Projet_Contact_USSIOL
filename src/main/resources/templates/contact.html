@@ -2,8 +2,8 @@
 <link type="text/css" rel="stylesheet" href="/style.css" />
 <h1>Contact</h1>
 <div class="menu">
-    <button class="button_menu disable">Lecture des contacts</button>
-    <button class="button_menu">Ajout de contacts</button>
+    <a href="/index"><button class="button_menu">Lecture des contacts</button></a>
+    <a href="/ajouter_contact"><button class="button_menu">Ajout de contacts</button></a>
     <button class="button_menu">Logout</button>
 </div>
 <br>
@@ -24,20 +24,21 @@
         <td th:utext="${c.libelle}"></td>
         <td th:utext="${c.cp}"></td>
         <td th:utext="${c.ville}"></td>
-        <td><a th:href="@{/edit/{id}(id=${c.id})}"><button><img class="icon" src="edit.png"/></button></a></td>
-        <td><a th:href="@{/delete/{id}(id=${c.id})}"><button><img class="icon" src="delete.png"/></button></a></td>
+        <td><a th:href="@{/edit/{id}(id=${c.id})}"><button><img class="icon" src="/edit.png"/></button></a></td>
+        <td><a th:href="@{/delete/{id}(id=${c.id})}"><button><img class="icon" src="/delete.png"/></button></a></td>
     </tr>
 </table>
 <table class="contact_liste">
     <tr>
         <th>ID</th>
         <th>Mail</th>
+        <th colspan="2">Action</th>
     </tr>
     <tr th:each="c : ${mails}">
         <td th:utext="${c.id}"></td>
         <td th:utext="${c.mail}"></td>
-        <td><a th:href="@{/edit/{id}(id=${c.id})}"><button><img class="icon" src="edit.png"/></button></a></td>
-        <td><a th:href="@{/delete/{id}(id=${c.id})}"><button><img class="icon" src="delete.png"/></button></a></td>
+        <td><a th:href="@{/edit/{id}(id=${c.id})}"><button><img class="icon" src="/edit.png"/></button></a></td>
+        <td><a th:href="@{/delete/{id}(id=${c.id})}"><button><img class="icon" src="/delete.png"/></button></a></td>
     </tr>
 </table>
 </html>
