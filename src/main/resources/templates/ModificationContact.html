@@ -1,0 +1,64 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<meta charset="UTF-8">
+<link rel="stylesheet"type="text/css" href="/style.css"/>
+<h1>Contact</h1>
+<div class="menu">
+    <a href="/index"><button class="button_menu">Lecture des contacts</button></a>
+    <a href="/ajouter_contact"><button class="button_menu">Ajout de contacts</button></a>
+    <button class="button_menu">Logout</button>
+</div>
+<br>
+<br>
+<form action="#" th:action="@{/modifier_contact/{id}(id=${id})}" th:object="${form}" method="post">
+    <table class="ajout">
+        <tr>
+            <th><p>Nom : </p></th><td><input th:field="*{nom}" type="text"/></td>
+        <tr>
+            <th><p>Prenom : </p></th><td><input th:field="*{prenom}" type="text"/></td>
+        </tr>
+    </table>
+    <input class="button_validation" text="Modifier" type="submit" >
+</form>
+    <br>
+    <br>
+    <h3 th:utext="'Adresse(s) de '+ ${form.prenom}"></h3>
+    <a th:href="@{/ajouter_adresse/{id}(id=${id})}"><button>Ajouter une adresse</button></a>
+    <table class="contact_liste">
+        <tr>
+            <th>ID</th>
+            <th>libelle</th>
+            <th>Code Postal</th>
+            <th>Ville</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr th:each="c : ${adresses}">
+            <td th:utext="${c.id}"></td>
+            <td th:utext="${c.libelle}"></td>
+            <td th:utext="${c.cp}"></td>
+            <td th:utext="${c.ville}"></td>
+            <td><a th:href="@{/deleteAdresse/{idContact}/{idAdresse}(idContact=${id},idAdresse=${c.id})}"><button><img class="icon" src="/delete.png"/></button></a></td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <h3 th:utext="'Mail(s) de '+ ${form.prenom}"></h3>
+    <a th:href="@{/ajouter_mail/{id}(id=${id})}"><button>Ajouter un mail</button></a>
+    <table class="contact_liste">
+        <tr>
+            <th>ID</th>
+            <th>Mail</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr th:each="m : ${mails}">
+            <form action="#" th:action="@{/modifyMail/{idContact}/{idMail}(idContact=${id}, idMail=${m.id})}"  method="post">
+            <td th:utext="${m.id}"></td>
+            <td><input type="text" th:name="mail" th:value="${m.mail}"/></td>
+            <td><button type="submit">Modifier</button></td>
+            </form>
+            <td><a th:href="@{/deleteMail/{idContact}/{idMail}(idContact=${id},idMail=${m.id})}"><button><img class="icon" src="/delete.png"/></button></a></td>
+        </tr>
+    </table>
+
+
+<br>
+</html>

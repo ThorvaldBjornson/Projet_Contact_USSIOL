@@ -1,6 +1,6 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <meta charset="UTF-8">
-<link rel="stylesheet"type="text/css" href="style.css"/>
+<link rel="stylesheet"type="text/css" href="/style.css"/>
 <h1>Contact</h1>
 <div class="menu">
     <a href="/index"><button class="button_menu">Lecture des contacts</button></a>
@@ -12,7 +12,7 @@
 <form action="#" th:action="@{/ajouter_mail/{id}(id=${id})}" method="post">
     <table class="ajout">
         <tr>
-            <th><p>Adresse mail : </p></th><td><input th:field="${mail}" type="email"/></td>
+            <th><p>Adresse mail : </p></th><td><input th:value="${mail}" th:name="mail" type="email"/></td>
         </tr>
     </table>
     <input class="button_validation" text="Ajouter" type="submit" >

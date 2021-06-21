@@ -67,14 +67,14 @@ public class GreetingController
 		}
 
 	@PostMapping("/ajouter_mail/{id}")
-	public String addMailPost(@PathVariable long id, @ModelAttribute String mail, Model model)
+	public String addMailPost(@PathVariable long id, @RequestParam String mail, Model model)
 		{
 		String redirection = new String();
 		if(mailRepository.findByMail(mail) == null)
 			{
 			Mail mail1 = new Mail(mail, contactRepository.findById(id));
 			mailRepository.save(mail1);
-			redirection = "redirect:/index";
+			redirection = "redirect:/editContact/" + new Long(id).toString();
 			}
 		else
 			{
@@ -109,7 +109,7 @@ public class GreetingController
 			}
 		c.addAdresse(adr);
 		contactRepository.save(c);
-		return "redirect:/index";
+		return "redirect:/editContact/" + new Long(id).toString();
 		}
 
 	@GetMapping("/contact/{id}")
@@ -132,7 +132,59 @@ public class GreetingController
 	@GetMapping("/deleteContact/{id}")
 	public String deleteContact(@PathVariable long id, Model model)
 	{
+		mailRepository.deleteAll(mailRepository.findByContact(contactRepository.findById(id)));
 		contactRepository.deleteById(id);
 		return "ValidationDelete";
+	}
+
+	@GetMapping("/editContact/{id}")
+	public String editContact(@PathVariable long id, Model model)
+	{
+		Contact contact = contactRepository.findById(id);
+		List<Mail> mails = contact.getMails();
+		List<Adresse> adresses = contact.getAdresses();
+		model.addAttribute("adresses", adresses);
+		model.addAttribute("mails", mails);
+		model.addAttribute("contact", contact);
+		Form form = new Form();
+		form.setNom(contact.getLastName());
+		form.setPrenom(contact.getFirstName());
+		model.addAttribute("form", form);
+		return "ModificationContact";
+	}
+	@PostMapping("/modifier_contact/{id}")
+	public String saveEditionContact(@PathVariable long id ,@ModelAttribute Form form, Model model)
+	{
+		Contact contact = contactRepository.findById(id);
+		contact.setLastName(form.getNom());
+		contact.setFirstName(form.getPrenom());
+		contactRepository.save(contact);
+		return "redirect:/editContact/"+ new Long(id).toString();
+	}
+
+	@GetMapping("/deleteAdresse/{idContact}/{idAdresse}")
+	public String deleteAdresseForUser(@PathVariable long idContact, @PathVariable long idAdresse, Model model)
+	{
+		Contact contact = contactRepository.findById(idContact);
+		Adresse adresse = adresseRepository.findById(idAdresse);
+		contact.removeAdresse(adresse);
+		contactRepository.save(contact);
+		return "redirect:/editContact/" + new Long(idContact).toString();
+	}
+
+	@GetMapping("/deleteMail/{idContact}/{idMail}")
+	public String deleteMail(@PathVariable long idContact, @PathVariable long idMail, Model model)
+	{
+		mailRepository.deleteById(idMail);
+		return  "redirect:/editContact/" + new Long(idContact).toString();
+	}
+
+	@PostMapping("/modifyMail/{idContact}/{idMail}")
+	public String modifyMail(@PathVariable long idContact, @PathVariable long idMail, @RequestParam String mail, Model model)
+	{
+		Mail mailToModify = mailRepository.findById(idMail);
+		mailToModify.setMail(mail);
+		mailRepository.save(mailToModify);
+		return "redirect:/editContact/" + new Long(idContact).toString();
 	}
 }

@@ -45,6 +45,8 @@ public class Contact
 		adresses.add(adresse);
 		}
 
+	public void removeAdresse(Adresse adresse) { adresses.remove(adresse); }
+
 	public Contact(String firstName, String lastName)
 		{
 		this.firstName = firstName;
@@ -67,7 +69,15 @@ public class Contact
 		return firstName;
 		}
 
-	public String getLastName()
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+		public String getLastName()
 		{
 		return lastName;
 		}
