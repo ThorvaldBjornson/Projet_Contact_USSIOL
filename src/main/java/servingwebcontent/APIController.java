@@ -1,11 +1,9 @@
 package servingwebcontent;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
@@ -35,5 +33,15 @@ public class APIController
 		mailRepository.deleteAll(mailRepository.findByContact(contactRepository.findById(id)));
 		contactRepository.deleteById(id);
 		return "Delete successful";
+		}
+
+	@PostMapping(path = "/api/ajouter_contact/", consumes = MediaType.APPLICATION_XML_VALUE)
+	String AddContact(@RequestBody ContactDetailsRequestModel contactDetails) throws Exception
+		{
+			Contact contact = new Contact();
+			contact.setFirstName(contactDetails.getFirstName());
+			contact.setLastName(contactDetails.getLastName());
+			contactRepository.save(contact);
+			return "add successful";
 		}
 	}
