@@ -25,6 +25,7 @@ dependencies {
     }
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.security:spring-security-test'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.4'
 }
 
 test {
