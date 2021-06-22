@@ -8,9 +8,12 @@
 </div>
 <br>
 <br>
-<h2 th:utext="${contact.firstName}">
+<h2 th:utext="${contact.firstName} + ' ' + ${contact.lastName}">
 
 </h2>
+<br>
+<br>
+<h3 th:utext="'Adresse(s) de '+ ${contact.firstName}"></h3>
 <table class="contact_liste">
     <tr>
         <th>ID</th>
@@ -25,6 +28,9 @@
         <td th:utext="${c.ville}"></td>
     </tr>
 </table>
+<br>
+<br>
+<h3 th:utext="'Mail(s) de '+ ${contact.firstName}"></h3>
 <table class="contact_liste">
     <tr>
         <th>ID</th>
