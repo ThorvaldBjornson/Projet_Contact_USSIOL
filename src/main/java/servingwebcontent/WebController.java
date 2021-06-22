@@ -1,24 +1,16 @@
 package servingwebcontent;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 @Controller
-public class GreetingController
+public class WebController
 {
 
 
@@ -100,12 +92,12 @@ public class GreetingController
 	public String addAdressGet(@PathVariable long id, Model model)
 		{
 		model.addAttribute("id", id);
-		model.addAttribute("form2", new Form2());
+		model.addAttribute("form2", new FormAdress());
 		return "ajout_adresse";
 		}
 
 	@PostMapping("/ajouter_adresse/{id}")
-	public String addAdressPost(@PathVariable long id, @ModelAttribute Form2 form, Model model)
+	public String addAdressPost(@PathVariable long id, @ModelAttribute FormAdress form, Model model)
 		{
 		Adresse adr = adresseRepository.findByLibelleAndCpAndVille(form.getLibelle(), form.getCp(), form.getVille());
 		Contact c = contactRepository.findById(id);
