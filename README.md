@@ -19,4 +19,4 @@ Profitez de notre application
  
  ```localhost:8080/api/delete_contact/{id}``` -> Supprime le contact choisi  
  
- ```localhost:8080/api/ajouter_contact``` -> Ajouter un contact à partir d'un fichier xml, un template est disponible dans /src/main/ressources/template/ajout_contact.xml  
+ ```localhost:8080/api/ajouter_contact``` -> Ajouter un contact à partir d'un fichier xml, un template est disponible dans ```/src/main/ressources/template/ajout_contact.xml```  
