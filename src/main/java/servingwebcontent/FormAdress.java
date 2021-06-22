@@ -1,6 +1,6 @@
 package servingwebcontent;
 
-public class Form2
+public class FormAdress
 	{
 
 	private String libelle;
@@ -8,12 +8,12 @@ public class Form2
 	private String ville;
 
 
-	public Form2()
+	public FormAdress()
 		{
 
 		}
 
-	public Form2(String libelle, String cp, String ville)
+	public FormAdress(String libelle, String cp, String ville)
 		{
 		this.libelle = libelle;
 		this.cp = cp;
