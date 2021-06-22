@@ -35,7 +35,7 @@ public class APIController
 		{
 		mailRepository.deleteAll(mailRepository.findByContact(contactRepository.findById(id)));
 		contactRepository.deleteById(id);
-		return "Delete successful";
+		return "<message>Delete successful</message>";
 		}
 
 	@PostMapping(path = "/api/ajouter_contact/", consumes = MediaType.APPLICATION_XML_VALUE)
@@ -51,6 +51,6 @@ public class APIController
 			Mail mail = new Mail(contactDetails.getMail(), contact);
 
 			mailRepository.save(mail);
-			return "add successful";
+			return "<message>add successful</message>";
 		}
 	}
