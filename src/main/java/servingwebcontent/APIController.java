@@ -1,6 +1,6 @@
 package servingwebcontent;
 
-import org.springframework.beans.BeanUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +14,9 @@ public class APIController
 
 	@Autowired
 	MailRepository mailRepository;
+
+	@Autowired
+	AdresseRepository adresseRepository;
 
 	@GetMapping(path = "/api/contacts", produces = MediaType.APPLICATION_XML_VALUE)
 	List<Contact> all()
@@ -38,10 +41,16 @@ public class APIController
 	@PostMapping(path = "/api/ajouter_contact/", consumes = MediaType.APPLICATION_XML_VALUE)
 	String AddContact(@RequestBody ContactDetailsRequestModel contactDetails) throws Exception
 		{
-			Contact contact = new Contact();
-			contact.setFirstName(contactDetails.getFirstName());
-			contact.setLastName(contactDetails.getLastName());
+			Adresse adresse = new Adresse(contactDetails.getLibelle(), contactDetails.getCp(), contactDetails.getVille());
+			adresseRepository.save(adresse);
+
+			Contact contact = new Contact(contactDetails.getFirstName(), contactDetails.getLastName());
+			contact.addAdresse(adresse);
 			contactRepository.save(contact);
+
+			Mail mail = new Mail(contactDetails.getMail(), contact);
+
+			mailRepository.save(mail);
 			return "add successful";
 		}
 	}

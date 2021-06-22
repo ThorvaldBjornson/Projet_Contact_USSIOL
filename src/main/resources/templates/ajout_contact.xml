@@ -1,0 +1,8 @@
+<ContactDetailsRequestModel>
+    <firstName>Michel</firstName>
+    <lastName>Drucker</lastName>
+    <libelle>9 rue de la paix</libelle>
+    <cp>51100</cp>
+    <ville>Reims</ville>
+    <mail>Michel.Drucker@france.tv</mail>
+</ContactDetailsRequestModel>
